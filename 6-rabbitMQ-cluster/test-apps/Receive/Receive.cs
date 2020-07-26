@@ -17,7 +17,7 @@ class Receive
 {
     public static void Main(string[] args)
     {
-        var factory = new ConnectionFactory() { HostName = "192.168.99.107", Port = 5675 };
+        var factory = new ConnectionFactory() { HostName = "192.168.99.107", Port = 5672 };
         using(var connection = factory.CreateConnection())
         using(var channel = connection.CreateModel())
         {
