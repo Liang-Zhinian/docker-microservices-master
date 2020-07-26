@@ -1,0 +1,33 @@
+version: '3.4'
+
+volumes:
+  rabbitmq:
+    # external: false
+    driver: local
+    driver_opts:
+      type: "nfs"
+      o: "addr=172.20.10.3,rw"
+      device: ":/Users/sprite/Documents/docker_data_storage/rabbitmq"
+
+# Overlay network that the services and the HAProxy exists in.
+networks:
+  demo_overlay_net:
+    external: true
+
+services:  
+
+  haproxy:
+    image: haproxy-rabbitmq-cluster:latest
+    hostname: haproxy
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+      - "1936:1936"
+    volumes: 
+      - ".:/usr/local/etc/haproxy:ro"
+    networks:
+      - demo_overlay_net
+    deploy:
+      # The HAProxy is assigned as the manager.
+      placement:
+        constraints: [node.role == manager]
