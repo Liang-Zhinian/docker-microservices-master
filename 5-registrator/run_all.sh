@@ -7,5 +7,5 @@ set -e
 echo "Deploying Registrator..."
 sh ./registrator_deploy.sh
 
-echo "Evaluating manager1..."
-eval $(docker-machine env manager1)
+echo "Evaluating myvm1..."
+eval $(docker-machine env myvm1)
