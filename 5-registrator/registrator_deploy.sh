@@ -7,7 +7,7 @@ set -e
 vms=( "myvm1" "myvm2" )
 
 # only deploy to swarm worker nodes / consul clients
-for vm in ${vms[@]:0:2}
+for vm in ${vms[@]:1:1}
 do
   docker-machine env ${vm}
   eval $(docker-machine env ${vm})
